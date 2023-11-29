@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    NDACowner: "zsolt.3.szabo@nokia.com"
+  labels:
+    app: vpn-manager
+  name: vpnmanager
+  namespace: edge-vpn
+spec:
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: vpn-manager
+      name: vpn-manager
+    spec:
+      serviceAccountName: edge-vpn-sa
+      containers:
+      - image: registry.dac.nokia.com/daas/vpnmanager:1.52
+        name: vpn-manager        
